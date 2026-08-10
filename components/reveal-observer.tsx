@@ -1,12 +1,16 @@
 "use client"
 
 import { useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 /**
  * Adds `is-visible` to every [data-reveal] element as it scrolls into view.
  * Motion itself (300ms fade-and-rise) is defined in globals.css.
+ * Re-scans on route change so client-side navigation still animates.
  */
 export function RevealObserver() {
+  const pathname = usePathname()
+
   useEffect(() => {
     const nodes = Array.from(
       document.querySelectorAll<HTMLElement>("[data-reveal]"),
@@ -35,7 +39,7 @@ export function RevealObserver() {
 
     nodes.forEach((n) => io.observe(n))
     return () => io.disconnect()
-  }, [])
+  }, [pathname])
 
   return null
 }

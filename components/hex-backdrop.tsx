@@ -67,7 +67,7 @@ export function HexBackdrop() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% 40%, transparent 40%, #0a0a0b 92%)",
+            "radial-gradient(120% 90% at 50% 40%, transparent 40%, #08080a 92%)",
         }}
       />
     </div>
