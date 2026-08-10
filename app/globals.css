@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Base palette */
+  --color-background: #0a0a0b;
+  --color-surface: #131316;
+  --color-surface-2: #17171b;
+  --color-foreground: #e8e8ea;
+  --color-muted: #8a8a92;
+  --color-muted-2: #5c5c63;
+  --color-accent: #ffb020;
+  --color-accent-dim: rgba(255, 176, 32, 0.14);
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+
+  /* Fonts */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SF Mono", monospace;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 2px;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(255, 176, 32, 0.25);
+  color: #fff;
+}
+
+/* Thin custom scrollbar to match the instrument aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0b;
+}
+::-webkit-scrollbar-thumb {
+  background: #26262b;
+  border: 2px solid #0a0a0b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #33333a;
+}
+
+/* Scroll-triggered fade-and-rise */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+  animation: reveal-rise 300ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal].is-visible {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Hero scan line traveling down the hex-dump layer */
+@keyframes scanline {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}
+
+/* Slow vertical drift of the hex rows */
+@keyframes hexdrift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
